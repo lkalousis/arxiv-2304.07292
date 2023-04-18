@@ -1,0 +1,443 @@
+%
+%
+
+\documentclass[a4paper,11pt]{article}
+\pdfoutput=1 
+
+\usepackage{jinstpub} 
+
+\usepackage{lineno}
+%\linenumbers
+
+\usepackage{enumerate}
+
+\title{\boldmath Calibration of the Hamamatsu R7081 photomultiplier tube}
+
+\author[a]{L. N. Kalousis} 
+%\author[a,1]{L. N. Kalousis\note{Corresponding author.}}
+%\author[b]{and M. Dracos}
+
+\affiliation[a]{Physics Department, National Technical University, 157 80 Zografou, Athens, Greece}
+%\affiliation[b]{IPHC, Universit\'e de Strasbourg, CNRS/IN2P3, F-67037 Strasbourg, France}
+
+\emailAdd{leonidas.kalousis@gmail.com}
+
+\abstract{The purpose of the present article is to demonstrate the calibration of the Hamamatsu R7081 photomultiplier using a numerical method based on the Discrete Fourier Transform (DFT). 
+Conventional techniques, usually employed in the literature, use approximate models or brute force numerical calculations of the convolution integrals that lead to the charge response function of the photomultiplier, $S_R(x)$. 
+In this publication, we explain how a truncated gaussian model for the single photoelectron amplification can lead to rigorous results if one leans on the DFT approach. 
+The distinct feature of this procedure is that $S_R(x)$ is calculated to all orders in the Poisson mean $\mu$ that characterizes the light intensity and no approximations are needed. 
+The same scheme can be applied to other photomultiplier tubes that share the same properties with R7081.}
+
+
+\keywords{Photon detectors for UV, visible and IR photons (vacuum) (photomultipliers, HPDs, others); 
+Detector alignment and calibration methods (lasers, sources, particle-beams);
+Analysis and statistical methods; 
+Data analysis}
+
+\arxivnumber{2304.07292} 
+
+
+\begin{document}
+\maketitle
+\flushbottom
+
+\section{Introduction}
+\label{sec:intro}
+
+The ten inches Hamamatsu R7081 photomultiplier tube (PMT) model has been used in several experiments in particle physics. 
+Double Chooz, RENO and IceCube to name only but a few \cite{dc,reno,icecube}.
+It is known to operate at a nominal gain of $10^7$ units of electron charge for about 1500~V of high voltage. 
+It has a photocathode sensitivity that ranges between 300 and 600~nm with a maximum peak in quantum efficiency of roughly 25~$\%$ at about 400~nm. 
+The good photoelectron resolution, the small dark noise, the low glass radioactivity levels and relatively low cost make R7081 an attractive choice for the instrumentation of various detectors. 
+
+Several methods have been employed in the literature for the calibration of the R7081 PMTs. 
+Perhaps, the most rigorous has been presented in a seminal paper written by Dossi \emph{et al.}, Ref~\cite{dossi}. 
+In the aforementioned publication, the single photoelectron (SPE) response was parametrized by a combination of an exponential distribution and a truncated gaussian. 
+In our view, the key elements of the Dossi paper can be summarized in the following points:
+\begin{enumerate}[i.]
+\item the realization that the exponential term that models photoelectrons (PEs) that miss the first amplification stage is part of the signal (it adds to the gain) and,
+\item the use of a properly normalized, truncated gaussian to describe the full amplification chain, avoiding thus the prediction of negative charges in the underlying formulae. 
+\end{enumerate}
+None of these points is entirely trivial. 
+Unfortunately the final equation for the PMT charge response, $S_R(x)$, is rather complicated to be worked out analytically and one has to resort to some sort of an approximation. % has to be devised. 
+For example, the DarkSide collaboration solved the convolution integrals involved in the calculation of $S_R(x)$ numerically for the first two peaks, and the higher peaks were approximated by perfect gaussians~\cite{darkside}. 
+That was adequate for the needs of DarkSide. 
+
+In this work, we seek to apply the Dossi model to the calibration of the R7081 PMT using the numerical method first presented in ref.~\cite{me}. 
+The distinct feature of this procedure is that $S_R(x)$ is calculated numerically to all orders in the Poissonian mean ($\mu$) and no approximations are needed. 
+In section~\ref{sec:theo} we outline briefly the basic theory of gain determination and we present the Discrete Fourier Transform (DFT) technique exploited throughout the publication. 
+In section~\ref{sec:data} we analyze data sets of R7081 PMT showcasing the validity of our study. 
+We close this article with some general remarks concerning the merits of our approach.
+
+
+\section{Standard theory}
+\label{sec:theo}
+
+%\subsection{Gain deconvolution method}
+
+Whenever a fixed number of photons is shot towards the photocathode of a PMT there is a certain probability that some will convert and create electrons (quantum efficiency). 
+These PEs are then collected by the anodes and directed to the amplification chain with some certain probability (collection efficiency). 
+The number of PEs ($n$) registered by the PMT is given by the well-known Poisson formula:
+\begin{align}
+P(n;\mu) = e^{-\mu}\frac{\mu^n}{n!}.
+\end{align}
+The Poisson mean, $\mu$, characterizes the light source and the quantum and collection efficiencies jointly. 
+Now, if $S(x)$ is the probability density function (PDF) for a single PE to create a charge in the vicinity of $x$, 
+the probability for $n$ PEs to produce $x$ is dictated by $S_n(x)$, where $S_n(x)$ is the $n$-times convolution of $S(x)$. 
+The charge response of a PMT can be readily worked out:
+\begin{align}
+S_R(x) = &\sum_{n=0}^{+\infty} P(n;\mu)   S^{(n)}_R(x) \nonumber \\
+            = & \sum_{n=0}^{+\infty} P(n;\mu) (S_n*B)(x). \label{eq:sr}
+\end{align}
+Note that a final convolution with the pedestal PDF, $B(x)$, is needed to include white noise from the electronics and other sources. 
+Of course, $S_1(x)=S(x)$ and $S_0(x)=\delta(x)$. More details on the theory of PMT calibration can be found in ref.~\cite{me}.
+The mean and standard deviation of $S_R(x)$, that is, $Q_R$ and $\sigma_R$ are equal to be:
+\begin{align}
+Q_R  = & \ Q_0 + \mu Q_s \\
+\sigma_R^2      = & \  \sigma_0^2 + \mu( \sigma_s^2 + Q_s^2 ),  
+\end{align}
+where $Q_0, \ \sigma_0$ are the mean and standard deviation of $B(x)$ respectively and $Q_s, \ \sigma_s$ those of $S(x)$.
+The calculation of these formulae can be found in the appendix~\ref{appA}. 
+
+%\subsection{Discrete Fourier Transform approach to $S_R(x)$}
+
+The essence of the DFT approach to gain determination lies in the realization that the DFT of $S_R(x)$, $\tilde S_R(k)$, has a very simple formula~\cite{me}:
+\begin{align}
+\tilde S_R(k) = \tilde B(k) e^{ \mu( \tilde S(k) - 1 ) } , \label{eq:dft}
+\end{align}
+where $\tilde B(k), \ \tilde S(k)$ are the DFTs of $B(x)$ and $S(x)$ respectively. 
+The fact that the series of eq.~\eqref{eq:sr} can be summed formally in the Fourier inverse space, 
+is due to the form of the Poisson factors and the simple mathematical theorem that the DFT of $S_n(x)$ is $n$ powers of $\tilde S(k)$, $\tilde S^n(k)$. 
+If one could invert eq.~\eqref{eq:dft} analytically then one has a formula of $S_R(x)$ in a closed form. In practice this is an impossibility.  
+In order to progress, in ref.~\cite{me} we proposed to perform the forward DFT and inverse DFT calculations numerically using the fftw package~\cite{fftw}. 
+For this purpose a C++/ROOT based software~\cite{root} was developed that calculates $S_R(x)$ for a given number of steps.
+The code has been committed in a public github repository with several examples that can assist the interested reader~\cite{git}. 
+We have analyzed all data in this article using this software. 
+
+
+\section{Data analysis}
+\label{sec:data}
+%
+
+\subsection{Single photoelectron response}
+ %
+ 
+ The SPE response model of any given PMT can be parameterized by the general formula:
+ \begin{align}
+S(x) =    \ w \alpha e^{-\alpha x } H(x) + (1-w)g(x). \label{eq:S}
+\end{align}
+A few remarks are necessary here. 
+First, the prefactor $w$ parameterizes, through the exponential distribution, the probability that a single PE will miss the first amplification stage. 
+It ranges from zero to one. For $w=0$, all PEs are amplified according to the full chain. 
+A better discussion of this can be found in ref.~\cite{dossi}. 
+$H(x)$ is the Heaviside step function.  
+The calculation of $Q_s$ and $\sigma_s$ is not at all trivial but not that difficult to perform. 
+It is done in the appendix \ref{appB} and the result is:
+\begin{align}
+Q_s = & \ \frac{w}{\alpha} + (1-w)Q_g \label{eq:qs} \\ 
+\sigma_s^2       = & \ \frac{w}{a^2} +(1-w)\sigma_g^2 + w(1-w)\left( Q_g -\frac{1}{a} \right)^2,
+\end{align}
+where $Q_g$ and $\sigma_g$ are the mean value and standard deviation of $g(x)$.
+Note that when $w=0$, we have $Q_s=Q_f$ and $\sigma_s=\sigma_f$. 
+On the other hand, for $w=1$ the mean value and standard deviation of $S(x)$ are those of the exponential term.  
+
+ The $g(x)$ PDF model adopted by Dossi \emph{et al.} is~\cite{dossi}:
+\begin{align}
+g(x) =    \frac{1}{g_N} \frac{1}{\sqrt{2\pi}\sigma} e^{ - \frac{( x - Q )^2}{2\sigma^2}} \ H(x). \label{eq:g}
+\end{align}
+This characterizes the amplification of the full dynode system. 
+It is a gaussian truncated at the negative values of $x$. 
+The factor $g_N$ ensures that $g(x)$ is properly normalized and equals to: 
+\begin{align}
+g_N =  \frac{1}{2} \text{erfc} \left( -\frac{Q}{\sqrt{2}\sigma } \right).
+\end{align}
+erfc(x) is the complementary error function~\cite{error}. 
+The mean value and standard deviation of $g(x)$ are deduced in the appendix~\ref{appC}. 
+They are equal to:
+\begin{align}
+Q_g = & \  Q + \kappa       \label{eq:qg}         \\
+\sigma_g^2       = & \  \sigma^2 - ( Q + \kappa )\kappa ,      
+\end{align}
+where $\kappa$ is given by the equation:
+\begin{align}
+ \kappa = \  \frac{1}{g_N} \frac{1}{\sqrt{2\pi}} \  \sigma \ e^{ - \frac{Q^2}{2\sigma^2}}. 
+\end{align} 
+One can see that as $Q$ increases, $\kappa$ approaches to zero due  to the damping exponential factor and $Q_f, \ \sigma_f$ approach $Q$ and $\sigma$ respectively.  
+
+\subsection{Experimental data and results}
+%
+
+A PMT model based on eq.~\eqref{eq:S} and \eqref{eq:g} is quite difficult to derive in a closed form.
+Even without the final convolution with $B(x)$, it is rather cumbersome to calculate $S_n(x)$ even for the lowest value of $n=2$. 
+For example, for $n=2$ one has three terms to compute while for $n=3$ one has four different terms in $S_n(x)$ ! 
+One has to resort to some sort of an approximation. 
+For instance, in the original Dossi \emph{et al.} paper a simple formula was given for $S_R(x)$ where all $S_n(x)$ distributions above $n=1$ were modeled by symmetric gaussians. 
+Additionally, in section~5 of that paper a brute force numerical method was presented. 
+It is the purpose of this article to solve the Dossi model using the DFT procedure explained in section~\ref{sec:theo}. 
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=9.7cm, height=6.5cm]{figures/c1.pdf} \\[1.5ex]
+\includegraphics[width=9.7cm, height=6.5cm]{figures/c2.pdf}  \\[1.5ex] %& 
+\includegraphics[width=9.7cm, height=6.5cm]{figures/c3.pdf} %\\
+\caption{A few fits obtained using the Dossi \emph{et al.} model through the DFT method. 
+The data are shown in the black dots and the best fit curve is shown in azure line. 
+The dotted lines show the contributions of the various PE peaks.}
+\label{fig:Q}
+\end{figure}
+Several data sets were taken with a R7081 PMT inside a light-tight box. 
+The details of the experimental setup can be found in ref.~\cite{me}.
+In general, the PMT was illuminated by an optical fiber connected to a light-emitting diode (LED).
+The light pulses were produced at the LED by a fast pulse generator. 
+The charge was readout by a LeCroy oscilloscope (WavePro 725Zi) triggering at the generator's second, duplicated channel. 
+Like this, all pulses were recorded, including those with no PEs produced at the photocathode (pedestal). 
+Figure~\ref{fig:Q} shows a few examples of the charge distributions obtained from our setup.  
+To analyze the data and obtain the gain from the data points, we fitted the spectra with the $S_R(x)$ calculated using the DFT method.  
+The procedure is best described in ref.~\cite{me}. 
+First, a gaussian fit was performed on the pedestal alone to obtain approximate values for $Q_0$, $\sigma_0$ and $\mu$. 
+The model was minimized using the Minuit2 software~\cite{Minuit2}. 
+
+\begin{table}[t!]
+\centering
+\begin{tabular}{| c  || c | c | c | c || c |}
+\hline
+$\mu$                      & $w$                         &  $\alpha$         &  $Q$                               &  $\sigma$ & $\chi^2$/NDOF\\[0.6ex] \hline\hline
+0.543 $\pm$ 0.003  & 0.170 $\pm$ 0.010  &  85 $\pm$ 10  & 0.02917 $\pm$ 0.00006 &  0.00790 $\pm$ 0.00008 & 1.52 \\
+0.632 $\pm$ 0.003  & 0.180 $\pm$ 0.008  &  71 $\pm$   4  & 0.02920 $\pm$ 0.00006 &  0.00782 $\pm$ 0.00007 & 1.18 \\
+0.768 $\pm$ 0.003  & 0.179 $\pm$ 0.006  &  70 $\pm$   3  & 0.02915 $\pm$ 0.00004 &  0.00785 $\pm$ 0.00005 & 1.60 \\
+0.979 $\pm$ 0.003  & 0.196 $\pm$ 0.006  &  63 $\pm$   2  & 0.02923 $\pm$ 0.00005 &  0.00774 $\pm$ 0.00005 & 1.86 \\
+1.357 $\pm$ 0.005  & 0.197 $\pm$ 0.007  &  61 $\pm$   2  & 0.02939 $\pm$ 0.00005 &  0.00778 $\pm$ 0.00006 & 1.68 \\
+2.014 $\pm$ 0.008  & 0.196 $\pm$ 0.007  &  61 $\pm$   2  & 0.02935 $\pm$ 0.00006 &  0.00777 $\pm$ 0.00007 & 1.55
+\\[0.6ex] \hline\hline
+\end{tabular}
+\caption{Summary of the R7081 PMT calibration results.}
+\label{tab:money}
+\end{table}
+Figure~\ref{fig:Q} shows the best fit curves in azure line. 
+One can readily see that the model follows closely the data for all examples ($\chi^2$/NDOF was always close to one). 
+Furthermore, more data were taken with increasing light intensity to asses the stability of gain determination. 
+The results are gathered in table~\ref{tab:money}. 
+Even though strong correlations exist between the various parameters, and even though there's a drift in the extraction of $w$ and $\alpha$  in particular,
+the gain as calculated by the eq.~\eqref{eq:qs} and \eqref{eq:qg} is quite stable inside the $\mu$~$\sim$~0.5 - 2.0 PE plateau. 
+Figure~\ref{fig:g} shows the gain distribution for the results of table~\ref{tab:money}. One readily sees that $Q_s$ is stable within a $\sim$~1~\% range. 
+Two further remarks should be made. First, one should never identify gain with $Q_g$ as this will overestimate the true gain. 
+On the contrary, the gain should be calculated by the weighted average of eq.~\eqref{eq:qs}. 
+Second, in the particular case of the R7081 PMT the truncation of the gaussian PDF at negative charge values has little impact on the final results; 
+$Q_s$ is very close to $Q$. 
+\begin{figure}[!t]
+\centering
+\includegraphics[width=10.0cm, height=6.8cm]{figures/G.pdf} 
+\caption{Distribution of the gain ($Q_s$) for the measurements compiled in table~\ref{tab:money}. }
+\label{fig:g}
+\end{figure}
+
+\section{Outlook}
+\label{sec:outro}
+
+In this article, we presented the calibration of the Hamamatsu R7081 PMT model. 
+The analysis was based on a truncated gaussian PDF for the SPE response and we relied on the DFT method to solve the $S_R(x)$ model numerically. 
+We have showed that despite the complications involved in the multidimensional fit of the data, one can extract the gain with good precision. 
+In particular, the gain can be determined with $\sim$~1~\% accuracy or better within the $\mu$~$\sim$ 0.5 - 2.0 plateau. 
+Attention was paid to emphasize the fact that the gain should not be confused with the mean value of the SPE response $g(x)$ and, instead, 
+a weighted average between the exponential and gaussian terms should be preferred. 
+The same procedure can be applied to other PMTs which share the same characteristics in charge response with the R7081 PMT. 
+The analysis software used in these studies exists in a public github repository and can be used by other investigators \emph{mutatis mutandis}. 
+
+
+\appendix
+%
+
+\section{Calculation of $Q_R$ and $\sigma_R$}
+\label{appA}
+
+In order to compute $Q_R$ and $\sigma_R$ we first write down the formulae:
+\begin{align}
+\sum_{n=0}^{+\infty} P( n; \mu ) & = 1, \\
+\sum_{n=0}^{+\infty} n P( n; \mu ) & = \mu, \\
+\sum_{n=0}^{+\infty} n^2 P( n; \mu ) & = \mu ( \mu + 1 ). 
+\end{align} 
+The first equation stems from probability conservation and it is very easy to derive.
+The other two can be proved by a shifting of the summing parameter $n$. 
+We also note the formulae which are deduced from the properties of the convolution:
+\begin{align}
+< ( S_n * B )(x) > \ = \ & Q_0 + n Q_s, \\
+\text{Var}[ ( S_n * B )(x) ] \ = \ & \sigma_0^2 + n\sigma_s^2. 
+\end{align} 
+We simplify our notation by setting $S_R^{(n)}(x)=( S_n * B )(x)$. 
+Using these equations, the mean value $Q_R$ becomes:
+\begin{align}
+Q_R \ = \ & < S_R (x) >  \nonumber \\
+ \ = \ & \sum_{n=0}^{+\infty} P( n; \mu ) \int_{-\infty}^{+\infty} x S_R^{(n)}(x) \ dx \nonumber \\
+  \ = \ & \sum_{n=0}^{+\infty} P( n; \mu ) ( Q_0 + n Q_s ) \nonumber \\
+  \ = \ & Q_0 + \mu Q_s.   
+\end{align} 
+On the other hand, to calculate the variance $\sigma_R^2$ we first find the integral:
+\begin{align}
+\int_{-\infty}^{+\infty} x^2 S_R(x) \ dx \ = & \  \sum_{n=0}^{+\infty} P( n; \mu )   \int_{-\infty}^{+\infty} x^2 S_R^{(n)}(x) \ dx \nonumber \\
+\ = & \ \sum_{n=0}^{+\infty} P( n; \mu ) ( \sigma_0^2 + n\sigma_s^2 + ( Q_0 +n Q_s )^2 ) \nonumber \\
+\ = & \ \sum_{n=0}^{+\infty} P( n; \mu ) ( \sigma_0^2 + n\sigma_s^2 + Q_0^2  + n^2 Q_s^2  + 2 n Q_0 Q_s ) \nonumber \\
+\ = & \ \sigma_0^2 + \mu\sigma_s^2 + Q_0^2 + \mu ( \mu + 1 ) Q_s^2 + 2 \mu Q_0 Q_s \nonumber \\
+\ = & \ \sigma_0^2 + \mu\sigma_s^2 + \mu Q_s^2 + ( Q_0 + \mu Q_s )^2. 
+\end{align}
+Where in the forth line we made use of the identities provided in the beginning of this section. 
+The variance now becomes:
+\begin{align}
+\sigma_R^2 \ = \ & \text{Var}[ S_R(x)] \nonumber \\
+\ = \ & \int_{-\infty}^{+\infty} x^2 S_R(x) \ dx - Q_R^2 \nonumber \\
+\ = \ & \sigma_0^2 + \mu( \sigma_s^2 + Q_s^2 ).
+\end{align}
+
+
+\section{Variance of $S(x)$}
+\label{appB}
+
+The mean value of $S(x)$ is straightforward to work out and its proof will not be presented here. \ \ \ 
+We only remark that the mean of the sum of two terms equals the sum of the two individual means. 
+\begin{align}
+Q_s =  \frac{w}{\alpha} + (1-w)Q_g 
+\end{align}
+The variance on the other hand is quite complicated and it will be treated in great detail. 
+We first remind the reader that:
+\begin{align}
+\sigma^2_s \  =  \ & \int_{-\infty}^{+\infty} x^2 S(x) \ dx - Q_s^2, \label{eq:ss}
+\end{align}
+and we proceed to calculate each term in eq.~\eqref{eq:ss} separately. 
+\begin{align}
+Q_s \ = \ &  \left(\  \frac{w}{\alpha} + (1-w)Q_g  \ \right)^2 \nonumber \\
+\ = \ & \frac{w^2}{\alpha^2} + 2 \frac{w(1-w)}{\alpha} Q_g + (1-w)^2 Q_g^2. \label{eq:e1}
+\end{align}
+\begin{align}
+\int_{-\infty}^{+\infty} x^2 S(x) \ dx  \  =  \ & w   \int_{0}^{+\infty} x^2 \alpha e^{-\alpha x } \ dx + (1-w)\int_{-\infty}^{+\infty} x^2 g(x) \ dx  \nonumber \\
+ \  =  \ & \frac{2w}{\alpha^2} + (1-w)( \sigma_g^2 + Q_g^2 ) \label{eq:e2}
+\end{align}
+Plugging eq.~\eqref{eq:e1} and \eqref{eq:e2} into $\sigma_R$ we have:
+\begin{align}
+\sigma^2_s \  =  \ & \frac{2w}{\alpha^2} + (1-w)( \sigma_g^2 + Q_g^2 )   -  \frac{w^2}{\alpha^2} - 2 \frac{w(1-w)}{\alpha} Q_g -  (1-w)^2 Q_g^2 \nonumber \\
+                \  =  \ & \frac{w}{\alpha^2} + (1-w) \sigma_g^2  + \frac{w(1-w)}{\alpha^2} + w(1-w)Q_g^2 - 2 \frac{w(1-w)}{\alpha} Q_g \nonumber \\
+                \  =  \ & \frac{w}{\alpha^2} + (1-w) \sigma_g^2  +  w(1-w)\left( \  \frac{1}{\alpha^2} +Q_g^2 - 2 \frac{Q_g}{\alpha} \  \right) \nonumber \\
+                 \  =  \ & \frac{w}{\alpha^2} + (1-w) \sigma_g^2  + w(1-w)\left( \ Q_g - \frac{1}{\alpha}  \ \right)^2.
+\end{align}
+
+\section{Mean value and variance of $g(x)$}
+\label{appC}
+
+%\subsection{Normalization}
+%
+
+
+\subsection*{Mean value}
+%
+
+The mean value of $g(x)$ is equal to:
+\begin{align}
+Q_g \  = \ & \int_{-\infty}^{+\infty} x g(x) \ dx \nonumber \\
+\  = \ &  \frac{1}{g_N}\frac{1}{\sqrt{2\pi}\sigma} \int_{0}^{+\infty} x e^{-\frac{(x-Q)^2}{2\sigma^2}} \ dx. \label{eq:intqg}
+\end{align}
+The integral of eq.~\eqref{eq:intqg} can be calculated using the substitution of variables:
+\begin{align}
+u \  = \ \frac{x-Q}{\sqrt{2}\sigma}.
+\end{align}
+It turns out to be:
+\begin{align}
+I \  = \ & \int_{0}^{+\infty} x e^{-\frac{(x-Q)^2}{2\sigma^2}} \ dx \nonumber \\
+\  = \ & \int_{  -\frac{Q}{\sqrt{2}\sigma}.  }^{+\infty}  ( \sqrt{2}\sigma u + Q ) e^{-u^2} \sqrt{2}\sigma \ du \nonumber \\
+\  = \ & 2 \sigma^2 \int_{  -\frac{Q}{\sqrt{2}\sigma} }^{+\infty}  u  e^{-u^2}  dx + \sqrt{2}\sigma Q \int _{  -\frac{Q}{\sqrt{2}\sigma}.  }^{+\infty} e^{-u^2}  dx \nonumber \\
+\  = \ & \sigma^2 e^{-  \frac{Q^2}{2\sigma^2 } } + \sqrt{2\pi}\sigma Q \ \frac{1}{2}\left( \ 1 - \text{erf}\left( -\frac{Q}{\sqrt{2}\sigma} \right) \ \right) \nonumber \\
+\  = \ & \sigma^2 e^{-  \frac{Q^2}{2\sigma^2 } } + \sqrt{2\pi}\sigma Q \  \frac{1}{2} \text{erfc}\left( -\frac{Q}{\sqrt{2}\sigma} \right)  \nonumber \\
+\  = \ & \sigma^2 e^{-  \frac{Q^2}{2\sigma^2 } } + \sqrt{2\pi}\sigma Q \ g_N.
+\end{align}
+If we substitute $I$ into eq.~\eqref{eq:intqg} we then have:
+\begin{align}
+Q_g \  = Q +\frac{1}{g_N}\frac{\sigma}{\sqrt{2\pi}} e^{-  \frac{Q^2}{2\sigma^2 } }. 
+\end{align}
+This equation can be simplified by setting: 
+\begin{align}
+\kappa  = \  \frac{1}{g_N}\frac{\sigma}{\sqrt{2\pi}} e^{-  \frac{Q^2}{2\sigma^2 } },
+\end{align}
+so that $Q_g$ is equal to:
+\begin{align}
+Q_g \  = Q + \kappa. 
+\end{align}
+
+
+\subsection*{Variance}
+%
+
+To calculate the variance of $g(x)$ we proceed to find the integral:
+\begin{align}
+ \int_{-\infty}^{+\infty} x^2 g(x) \ dx \ = \ \frac{1}{g_N} \frac{1}{\sqrt{2\pi}\sigma} \int_{0}^{+\infty} x^2 e^{-\frac{(x-Q)^2}{2\sigma^2}} \ dx
+\end{align}
+\begin{align}
+ I \ =  \ &\int_{0}^{+\infty} x^2 e^{-\frac{(x-Q)^2}{2\sigma^2}} \ dx  \nonumber \\
+ \  = \ & \int_{  -\frac{Q}{\sqrt{2}\sigma}.  }^{+\infty}  ( \sqrt{2}\sigma u + Q )^2 e^{-u^2} \sqrt{2}\sigma \ du \nonumber \\
+ \  = \ & \sqrt{2\pi}\sigma g_N ( \sigma^2 + Q^2 ) + \sigma^2 Q e^{-  \frac{Q^2}{2\sigma^2 } }
+\end{align}
+\begin{align}
+ \int_{0}^{+\infty} x^2 g(x) \ dx \ = \ &  \frac{1}{g_N} \frac{1}{\sqrt{2\pi}\sigma} I \ \nonumber \\
+ \  = \ & \sigma^2 + Q^2 +  \frac{1}{g_N}\frac{\sigma Q }{\sqrt{2\pi}} e^{-  \frac{Q^2}{2\sigma^2 } }  \nonumber \\
+  \  = \ & \sigma^2 + Q^2 + \kappa Q
+\end{align}
+Finally, the variance $\sigma_g^2$ is given by the formula:
+\begin{align}
+\sigma_g^2 \ = \ & \int_{-\infty}^{+\infty} x^2 g(x) \ dx - Q_g^2 \nonumber \\
+\  = \ & \sigma^2 + Q^2 + \kappa Q - ( Q+\kappa)^2 \nonumber \\
+\  = \ & \sigma^2  - ( Q + \kappa )\kappa. 
+ \end{align}
+
+
+
+
+
+
+\acknowledgments
+%
+
+The data used in this publication were taken in the laboratory of M. Dracos and we wish to thank him for allowing us to use them for the purposes of this communication. 
+%We also wish to thank him for reading the first manuscript of this article and providing valuable comments.  
+
+%\paragraph{Note added.} This is also a good position for notes added
+%after the paper has been written.
+
+
+
+
+
+% We suggest to always provide author, title and journal data:
+% in short all the informations that clearly identify a document.
+
+\begin{thebibliography}{99}
+
+\bibitem{dc}
+H. de Kerret et al. (Double Chooz Collaboration), \emph{The Double Chooz antineutrino detectors},\\ 
+\href{https://link.springer.com/article/10.1140/epjc/s10052-022-10726-x}{\emph{The European Physical Journal C} {\bf 82} (2022) 804}.
+
+\bibitem{reno} J.K. Ahn et al. (RENO Collaboration), \emph{RENO: An Experiment for Neutrino Oscillation \\ Parameter $\theta_{13}$ Using Reactor Neutrinos at Yonggwang}, 2010
+[\href{https://arxiv.org/abs/1003.1391}{\texttt{arXiv:1003.1391}}].
+
+\bibitem{icecube} R. Abbasi et al. (IceCube Collaboration), \emph{Calibration and characterization of the IceCube photomultiplier tube}, 
+\href{https://www.sciencedirect.com/science/article/abs/pii/S0168900210006662}{ \emph{Nucl. Instrum. Meth. A} {\bf 618} (2010) 139}.
+
+\bibitem{dossi}  R. Dossi {et al.}, \emph{Methods for precise photoelectron counting with photomultipliers}, 
+\href{https://www.sciencedirect.com/science/article/pii/S0168900200003375}{\emph{Nucl. Instrum. Meth.} {\bf A 451} (2000) 623-637}.
+
+\bibitem{darkside} T. Alexander {et al.} (DarkSide Collaboration), \emph{Light Yield in DarkSide-10: a Prototype Two-phase Argon TPC for Dark Matter Searches}, 
+\href{https://www.sciencedirect.com/science/article/pii/S0927650513001254?via\%3Dihub}{\emph{Astropart. Phys.} {\bf 49} (2013) 44-51}.  
+%[\href{https://arxiv.org/abs/1204.6218}{\texttt{arXiv:1204.6218}}]. 
+
+\bibitem{me} L. N. Kalousis {et al.}, \emph{A fast numerical method for photomultiplier calibration},\\  \href{https://iopscience.iop.org/article/10.1088/1748-0221/15/03/P03023}{\emph{JINST} {\bf 15} (2020) P03023}.
+
+\bibitem{fftw} \href{http://www.fftw.org}{http://www.fftw.org} 
+
+\bibitem{root} R. Brun and F. Rademakers, \emph{ROOT - An Object Oriented Data Analysis Framework}, \emph{Proceedings AIHENP'96 Workshop}, Lausanne Switzerland (1996),
+\href{https://www.sciencedirect.com/science/article/pii/S016890029700048X?via\%3Dihub}{\emph{Nucl. Instrum. Meth.} {\bf A 389 } (1997) 81-86.} \\
+See also \href{http://root.cern.ch/}{http://root.cern.ch/}
+
+\bibitem{git} \href{https://github.com/kalousis/PMTCalib}{https://github.com/lkalousis/PMTCalib}
+
+\bibitem{error} \href{https://en.wikipedia.org/wiki/Error\_function}{https://en.wikipedia.org/wiki/Error\_function}
+
+\bibitem{Minuit2} F. James and M. Winkler, \emph{C++ MINUIT User's Guide},
+\href{https://root.cern.ch/root/htmldoc/guides/minuit2/Minuit2.html}{https://root.cern.ch/root/htmldoc/guides/minuit2/Minuit2.html}
+
+\end{thebibliography}
+\end{document}
