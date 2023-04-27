@@ -79,7 +79,7 @@ Whenever a fixed number of photons is shot towards the photocathode of a PMT the
 These PEs are then collected by the anodes and directed to the amplification chain with some certain probability (collection efficiency). 
 The number of PEs ($n$) registered by the PMT is given by the well-known Poisson formula:
 \begin{align}
-P(n;\mu) = e^{-\mu}\frac{\mu^n}{n!}.
+P(n;\mu) = e^{-\mu}\frac{\mu^n}{n!}. \label{eq:poisson}
 \end{align}
 The Poisson mean, $\mu$, characterizes the light source and the quantum and collection efficiencies jointly. 
 Now, if $S(x)$ is the probability density function (PDF) for a single PE to create a charge in the vicinity of $x$, 
@@ -197,6 +197,20 @@ The procedure is best described in ref.~\cite{me}.
 First, a gaussian fit was performed on the pedestal alone to obtain approximate values for $Q_0$, $\sigma_0$ and $\mu$. 
 The model was minimized using the Minuit2 software~\cite{Minuit2}. 
 
+
+
+
+We should point out that for all the measurements included in this publication the optical fiber was placed at the center of the photocathode,
+using a plastic halo-like structure, and that the fiber was always pointing vertically with respect to the surface of the PMT\footnote{%
+More details on the experimental setup, including pictures of the halo-like structure, can be found in ref.~\cite{thesis}.}. 
+In this way one has to deal a single quantum efficiency (that at the center of the PMT) and we expect the assumption of eq.~\eqref{eq:poisson} to be quite valid. 
+Note that the quantum efficiency of the PMT is expected to vary across the surface of the photocathode and a light source illuminating the whole surface of the PMT will not be 
+accurately described by eq.~\eqref{eq:poisson}. In such cases one has to take into account the variance of the quantum efficiency across the incident angle and the Poissonian factors have to be modified. 
+Note also that any possible bias in the extraction of the gain has to be attributed to the validity of the SPE response model (which was taken as an assumption)
+and/or the stability of our setup. 
+
+
+
 \begin{table}[t!]
 \centering
 \begin{tabular}{| c  || c | c | c | c || c |}
@@ -242,6 +256,21 @@ Attention was paid to emphasize the fact that the gain should not be confused wi
 a weighted average between the exponential and gaussian terms should be preferred. 
 The same procedure can be applied to other PMTs which share the same characteristics in charge response with the R7081 PMT. 
 The analysis software used in these studies exists in a public github repository and can be used by other investigators \emph{mutatis mutandis}. 
+
+
+
+
+The following remarks are necessary. 
+In this publication we have only tried to demonstrate the calibration of the R7081 PMT model in just the simplest case. 
+That is, when a single PMT was placed inside a dark, light-tight box and with the optical fiber positioned at the center of the photocathode, and always pointing vertically towards the surface of the PMT. 
+We have demonstrated that in this simple example, the gain remains remarkably stable (within $\sim 1\%$ or better) inside the $\mu \sim 0.5 - 2.0$ plateau. 
+We should note that in large (monolithic) detectors equipped with a sizable number of PMTs this simplictic picture ceases to apply. 
+In particular, in those circumstances we can expect the extraction of the gain to depend on the geometry of the detector and the position of the event. 
+ We can only expect that the accuracy achieved in this article will not be attainable in such cases.
+The question of the \emph{in situ} gain calibration of similar, complicated instruments lies beyond the scope of this article and was not treated here. 
+More details on the energy and spatial resolution of large-volume liquid scintillator detectors cab be found elsewhere~\cite{smirnov}. 
+
+
 
 
 \appendix
@@ -438,6 +467,12 @@ See also \href{http://root.cern.ch/}{http://root.cern.ch/}
 
 \bibitem{Minuit2} F. James and M. Winkler, \emph{C++ MINUIT User's Guide},
 \href{https://root.cern.ch/root/htmldoc/guides/minuit2/Minuit2.html}{https://root.cern.ch/root/htmldoc/guides/minuit2/Minuit2.html}
+
+\bibitem{thesis} L. N. Kalousis, \emph{Calibration of the Double Chooz detector and cosmic background studies}, \href{http://inspirehep.net/record/1295030}{\emph{PhD thesis, University of Strasbourg} (2012)}. 
+
+\bibitem{smirnov} O. Yu. Smirnov, \emph{Energy and spatial resolution of a large-volume liquid-scintillator detector}, \\
+\href{https://link.springer.com/article/10.1023/A:1024458203966}{\emph{Instrum. Exp. Tech.} {\bf 46} (2003) 327-344.}
+
 
 \end{thebibliography}
 \end{document}

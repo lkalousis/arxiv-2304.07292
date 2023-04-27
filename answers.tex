@@ -1,0 +1,66 @@
+\documentclass[a4paper,11pt]{article}
+\pdfoutput=1 
+
+%\usepackage{jinstpub} 
+%
+
+\usepackage{enumitem} 
+%
+
+\begin{document}
+
+{\bf Answers to the referee}
+\\[1ex]
+
+Both referee's comments are (indeed) valid and we would like to thank him for bringing these to our attention. 
+We have tried to address them in the following way: 
+\\[1ex]
+
+1. In all the measurements taken for the purposes of this publication the optical fiber was placed, using a halo-like plastic structure, 
+at the center of the photocathode and the fiber was always pointing vertically with respect to the surface of the PMT.   
+In this way, one has to deal with \emph{only one} quantum efficiency (that at the center of the PMT) and the possible bias 
+described by the referee has to be absent. 
+
+We should also point out that any remaining bias in the extraction of the gain, should be attributed to the SPE response model, 
+eqs.~(3.1) and (3.4), and/or the stability of our setup. In particular, the SPE model proposed by Dossi \emph{et al.} is only an assumption 
+and we might expect that it doesn't parametrize the charge response of the R7081 PMT in a rigorous way for all values of $\mu$. 
+And even though the $\chi^2/NDOF$ returned by the minimizer was always close to one, 
+one might expect that some bias can be induced in those circumstances where the validity of $S(x)$ ceases to apply. 
+
+We have added the following paragraph in the body of this article, to address this point:
+\\[1ex]
+
+We should point out that for all the measurements included in this publication the optical fiber was placed at the center of the photocathode,
+using a plastic halo-like structure, and that the fiber was always pointing vertically with respect to the surface of the PMT\footnote{%
+More details on the experimental setup, including pictures of the halo-like structure, can be found in ref.~[12].}. 
+In this way one has to deal a single quantum efficiency (that at the center of the PMT) and we expect the assumption of eq.~(2.1) to be quite valid. 
+Note that the quantum efficiency of the PMT is expected to vary across the surface of the photocathode and a light source illuminating the whole surface of the PMT will not be 
+accurately described by eq.~(2.1). In such cases one has to take into account the variance of the quantum efficiency across the incident angle and the Poissonian factors have to be modified. 
+Note also that any possible bias in the extraction of the gain has to be attributed to the validity of the SPE response model (which was taken as an assumption)
+and/or the stability of our setup. 
+
+
+
+
+\newpage
+2. We understand the referee's comment and we believe that it is a valid one.  
+Nonetheless, in this article we have only tried to calibrate the R7081 PMT model in the just simplest case. 
+When a single PMT is placed inside a dark and light-tight box, and with the optical fiber placed (vertically) at the center of the photocathode. 
+The question of the \emph{in situ} calibration of large (monolithic) detectors and the associated accuracies is beyond the scope of this publication. 
+
+We have added the following paragraph in the Outlook to reflect this view:
+\\[1ex]
+
+The following remarks are necessary. 
+In this publication we have only tried to demonstrate the calibration of the R7081 PMT model in just the simplest case. 
+That is, when a single PMT was placed inside a dark, light-tight box and with the optical fiber positioned at the center of the photocathode, and always pointing vertically towards the surface of the PMT. 
+We have demonstrated that in this simple example, the gain remains remarkably stable (within $\sim 1\%$ or better) inside the $\mu \sim 0.5 - 2.0$ plateau. 
+We should note that in large (monolithic) detectors equipped with a sizable number of PMTs this simplictic picture ceases to apply. 
+In particular, in those circumstances we can expect the extraction of the gain to depend on the geometry of the detector and the position of the event. 
+ We can only expect that the accuracy achieved in this article will not be attainable in such cases.
+The question of the \emph{in situ} gain calibration of similar, complicated instruments lies beyond the scope of this article and was not treated here. 
+More details on the energy and spatial resolution of large-volume liquid scintillator detectors cab be found elsewhere~[13]. 
+
+
+
+\end{document}
