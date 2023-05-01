@@ -51,7 +51,7 @@ It has a photocathode sensitivity that ranges between 300 and 600~nm with a maxi
 The good photoelectron resolution, the small dark noise, the low glass radioactivity levels and relatively low cost make R7081 an attractive choice for the instrumentation of various detectors. 
 
 Several methods have been employed in the literature for the calibration of the R7081 PMTs. 
-Perhaps, the most rigorous has been presented in a seminal paper written by Dossi \emph{et al.}, Ref~\cite{dossi}. 
+Perhaps, the most rigorous has been presented in a seminal paper written by Dossi \emph{et al.}, ref.~\cite{dossi}. 
 In the aforementioned publication, the single photoelectron (SPE) response was parametrized by a combination of an exponential distribution and a truncated gaussian. 
 In our view, the key elements of the Dossi paper can be summarized in the following points:
 \begin{enumerate}[i.]
@@ -201,8 +201,8 @@ The model was minimized using the Minuit2 software~\cite{Minuit2}.
 
 
 We should point out that for all the measurements included in this publication the optical fiber was placed at the center of the photocathode,
-using a plastic halo-like structure, and that the fiber was always pointing vertically with respect to the surface of the PMT\footnote{%
-More details on the experimental setup, including pictures of the halo-like structure, can be found in ref.~\cite{thesis}.}. 
+using a plastic halo-like structure, and that the fiber was always pointing vertically with respect to the surface of the PMT.\footnote{%
+More details on the experimental setup, including pictures of the halo-like structure, can be found in ref.~\cite{thesis}.}
 In this way one has to deal a single quantum efficiency (that at the center of the PMT) and we expect the assumption of eq.~\eqref{eq:poisson} to be quite valid. 
 Note that the quantum efficiency of the PMT is expected to vary across the surface of the photocathode and a light source illuminating the whole surface of the PMT will not be 
 accurately described by eq.~\eqref{eq:poisson}. In such cases one has to take into account the variance of the quantum efficiency across the incident angle and the Poissonian factors have to be modified. 
@@ -237,7 +237,7 @@ Figure~\ref{fig:g} shows the gain distribution for the results of table~\ref{tab
 Two further remarks should be made. First, one should never identify gain with $Q_g$ as this will overestimate the true gain. 
 On the contrary, the gain should be calculated by the weighted average of eq.~\eqref{eq:qs}. 
 Second, in the particular case of the R7081 PMT the truncation of the gaussian PDF at negative charge values has little impact on the final results; 
-$Q_s$ is very close to $Q$. 
+$Q_g$ is very close to $Q$. 
 \begin{figure}[!t]
 \centering
 \includegraphics[width=10.0cm, height=6.8cm]{figures/G.pdf} 
@@ -264,11 +264,11 @@ The following remarks are necessary.
 In this publication we have only tried to demonstrate the calibration of the R7081 PMT model in just the simplest case. 
 That is, when a single PMT was placed inside a dark, light-tight box and with the optical fiber positioned at the center of the photocathode, and always pointing vertically towards the surface of the PMT. 
 We have demonstrated that in this simple example, the gain remains remarkably stable (within $\sim 1\%$ or better) inside the $\mu \sim 0.5 - 2.0$ plateau. 
-We should note that in large (monolithic) detectors equipped with a sizable number of PMTs this simplictic picture ceases to apply. 
+We should note that in large (monolithic) detectors equipped with a sizable number of PMTs this simplistic picture ceases to apply. 
 In particular, in those circumstances we can expect the extraction of the gain to depend on the geometry of the detector and the position of the event. 
  We can only expect that the accuracy achieved in this article will not be attainable in such cases.
 The question of the \emph{in situ} gain calibration of similar, complicated instruments lies beyond the scope of this article and was not treated here. 
-More details on the energy and spatial resolution of large-volume liquid scintillator detectors cab be found elsewhere~\cite{smirnov}. 
+More details on the energy and spatial resolution of large-volume liquid scintillator detectors can be found elsewhere~\cite{smirnov}. 
 
 
 
@@ -461,7 +461,7 @@ H. de Kerret et al. (Double Chooz Collaboration), \emph{The Double Chooz antineu
 \href{https://www.sciencedirect.com/science/article/pii/S016890029700048X?via\%3Dihub}{\emph{Nucl. Instrum. Meth.} {\bf A 389 } (1997) 81-86.} \\
 See also \href{http://root.cern.ch/}{http://root.cern.ch/}
 
-\bibitem{git} \href{https://github.com/kalousis/PMTCalib}{https://github.com/lkalousis/PMTCalib}
+\bibitem{git} \href{https://github.com/lkalousis/PMTCalib}{https://github.com/lkalousis/PMTCalib}
 
 \bibitem{error} \href{https://en.wikipedia.org/wiki/Error\_function}{https://en.wikipedia.org/wiki/Error\_function}
 
