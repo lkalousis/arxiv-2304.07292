@@ -246,8 +246,14 @@ On the contrary, the gain should be calculated by the weighted average of eq.~\e
 Second, in the particular case of the R7081 PMT the truncation of the gaussian PDF at negative charge values has little impact on the final results; 
 $Q_g$ is very close to $Q$. 
 
-
 \subsection{Comparison with the numerical integration method}
+%
+
+To assess the advantages of the DFT approach towards gain calibration we analyzed the same R7081 data set using the numerical method presented in ref.~\cite{dossi}.   
+Note that according to this procedure all the integrals of the convolutions in eq.~\eqref{eq:sr} are calculated numerically. 
+In practice, this was implemented in our analysis software using multiple for loops. 
+Unfortunately, the execution time to compute several $S_n(x)$ functions becomes increasingly large rendering this method 
+The $S_2(x)$ and 
 
 
 
@@ -259,14 +265,13 @@ $Q_g$ is very close to $Q$.
 
 
 
-\newpage
 \section{Simulated data}
 \label{sec:mc}
 
-yeah !
+Lots of work !
 
 
-
+\newpage
 \section{Outlook}
 \label{sec:outro}
 
