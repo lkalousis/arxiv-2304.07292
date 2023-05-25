@@ -177,9 +177,9 @@ It is the purpose of this article to solve the Dossi model using the DFT procedu
 
 \begin{figure}[!t]
 \centering
-\includegraphics[width=9.7cm, height=6.5cm]{figures/c1.pdf} \\[1.5ex]
-\includegraphics[width=9.7cm, height=6.5cm]{figures/c2.pdf}  \\[1.5ex] %& 
-\includegraphics[width=9.7cm, height=6.5cm]{figures/c3.pdf} %\\
+\includegraphics[width=9.5cm, height=6.4cm]{figures/c1.pdf} \\[1.5ex]
+\includegraphics[width=9.5cm, height=6.4cm]{figures/c2.pdf}  \\[1.5ex] %& 
+\includegraphics[width=9.5cm, height=6.4cm]{figures/c3.pdf} %\\
 \caption{A few fits obtained using the Dossi \emph{et al.} model through the DFT method. 
 The data are shown in the black dots and the best fit curve is shown in azure line. 
 The dotted lines show the contributions of the various PE peaks.}
@@ -209,13 +209,6 @@ accurately described by eq.~\eqref{eq:poisson}. In such cases one has to take in
 Note also that any possible bias in the extraction of the gain has to be attributed to the validity of the SPE response model (which was taken as an assumption)
 and/or the stability of our setup. 
 
-\begin{figure}[!t]
-\centering
-\includegraphics[width=10.0cm, height=6.8cm]{figures/G.pdf} 
-\caption{Distribution of the gain ($Q_s$) for the measurements compiled in table~\ref{tab:money}. }
-\label{fig:g}
-\end{figure}
-
 \begin{table}[t!]
 \centering
 \begin{tabular}{| c  || c | c | c | c || c |}
@@ -233,6 +226,13 @@ $\mu$                      & $w$                         &  $\alpha$         &  
 \label{tab:money}
 \end{table}
 
+\begin{figure}[!t]
+\centering
+\includegraphics[width=12.0cm, height=8.8cm]{figures/G.pdf} 
+\caption{Distribution of the gain ($Q_s$) for the measurements compiled in table~\ref{tab:money}. }
+\label{fig:g}
+\end{figure}
+
 Figure~\ref{fig:Q} shows the best fit curves in azure line. 
 One can readily see that the model follows closely the data for all examples ($\chi^2$/NDOF was always close to one). 
 Furthermore, more data were taken with increasing light intensity to asses the stability of gain determination. 
@@ -248,7 +248,7 @@ $Q_g$ is very close to $Q$.
 \subsection{Comparison with the numerical integration method}
 %
 
-To assess the advantages of the DFT approach towards gain calibration, we analyzed the same R7081 data set using the numerical method presented in ref.~\cite{dossi}.   
+To assess the advantages of the DFT approach towards gain determination, we analyzed the same R7081 data set using the numerical method presented in ref.~\cite{dossi}.   
 Note that according to this procedure all the integrals of the convolutions in eq.~\eqref{eq:sr} are calculated numerically. 
 In practice, this was implemented in our analysis software using multiple for loops. 
 Unfortunately, the execution time to compute several $S_n(x)$ distributions becomes increasingly large, and thus, is rendering this method almost inapplicable. 
@@ -280,39 +280,59 @@ The last row shows the execution time that each method took for the analysis of 
 From these numbers the following conclusions can be drawn:
 \begin{enumerate}[i.]
 \item The first thing that can be observed from table~\ref{tab:comp} is that the two methods give identical figures insofar as gain determination is concerned. 
-Inside the $\mu\sim$ 0.5 - 2.0 plateau both techniques return the same gain. 
+Inside the $\mu\sim$ 0.5 -- 2.0 plateau both techniques return the same gain. 
 \item Second, the DFT approach gives a slightly better fit, since the $\chi^2$/NDOF is systematically smaller than that of the numerical method. 
 \item Last, the DFT method is almost two hundred times faster than the numerical integration. 
 For the analysis of large data sets (as is the case in large monolithic detectors) a numerical integration is impractical. 
 On the other hand, DFT only took two seconds to analyze these six cases. 
 \end{enumerate}
-The data that we took and analyzed in this article lie well inside the $\mu\sim$ 0.5 - 2.0 window. 
+The data that we took and analyzed in this article lie well inside the $\mu\sim$ 0.5 -- 2.0 window. 
 Part of this decision was motivated by the fact that a pronounced pedestal always assist the fitter and enhances gain determination through strong constraints in $Q_0$, $\sigma_0$ and $\mu$. 
-To understand how our method performs for large $\mu$, in the next section we analyzed data sets of simulated data.  
+To understand how our method performs for large $\mu$ in the next section we analyzed data sets of simulated data.  
 
 \section{Simulated data}
 \label{sec:mc}
 
-Series of several toy Monte Carlo SPE data were generated. 
-The algorithm that was followed to produce these spectra can be summarized in the following steps
+Series of several toy Monte Carlo SPE spectra were generated. 
+The algorithm that was used to produce these data sets can be summarized in the following steps:
 \begin{enumerate}[i.]
-\item First, a number of photoelectrons, $n$, was thrown 
-\item
+\item First, a number of PEs was thrown from a Poisson distribution of mean value $\mu$.
+\item For each PE, a charge was picked randomly from the SPE distribution of eqs.~\eqref{eq:S} and \eqref{eq:g}. 
+The total charge was calculated by summing the individual charges that each PE deposits. 
+\item A charge was thrown from the gaussian distribution of the pedestal and summed to the total charge obtained in step two. 
+\item The final, total charge was filled in a histogram.  
+\item This procedure was repeated $2.5\  10^5$ times and a histogram of $2.5\  10^5$ entries was produced. 
 \end{enumerate}
+The parameters of the pedestal and SPE were set to match those of the first line in table~\ref{tab:money}. 
+For each value of $\mu$ one hundred toy spectra were generated and fitted with both the DFT and the numerical integration methods. 
+Data were generated for $\mu$ inside the 0.5 -- 8.0 range. For each set of one hundred toys the distribution of the absolute deviation from the true gain ($Q_s$):
+\begin{align}
+\Delta Q_s = \frac{Q_s^\prime}{Q_s} - 1,
+\end{align}  
+was plotted. We note that $Q_s^\prime$ is the gain parameter returned by the minimizer. 
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=11.5cm, height=8.2cm]{figures/comp.pdf} 
+\caption{}
+\label{fig:comp}
+\end{figure}
+
+Figure~\ref{fig:comp} shows the results of this exercise. 
+The $x$ axis shows $\mu$ and the $y$ axis shows the mean value of the $\Delta Q_s$ distribution for the one hundred toys. 
+The black dots depict the results from the DFT approach and the green dots those of the numerical integration respectively. 
+One sees that DFT provides excellent results inside the $\mu = $ 0.5 -- 4.0 range and a deviation of $\sim$ 1\% is observed only at the high value of $\mu=8$. 
+In contrast, the numerical integration method starts to deviate significantly from the true gain at $\mu=4$ and for $\mu=8$ the deviation reaches the value of ... \%. 
 
 
 
-
-
-
-
-
-
-\newpage
 \section{Outlook}
 \label{sec:outro}
 
-In this article, we presented the calibration of the Hamamatsu R7081 PMT model. 
+In this article, we presented the calibration of PMTs with gaussian SPE charge response. %the Hamamatsu R7081 PMT model. 
+
+
+\newpage
 The analysis was based on a truncated gaussian PDF for the SPE response and we relied on the DFT method to solve the $S_R(x)$ model numerically. 
 We have showed that despite the complications involved in the multidimensional fit of the data, one can extract the gain with good precision. 
 In particular, the gain can be determined with $\sim$~1~\% accuracy or better within the $\mu$~$\sim$ 0.5 - 2.0 plateau. 
