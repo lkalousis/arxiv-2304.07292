@@ -228,7 +228,7 @@ $\mu$                      & $w$                         &  $\alpha$         &  
 
 \begin{figure}[!t]
 \centering
-\includegraphics[width=12.0cm, height=8.8cm]{figures/G.pdf} 
+\includegraphics[width=12.2cm, height=8.8cm]{figures/G.pdf} 
 \caption{Distribution of the gain ($Q_s$) for the measurements compiled in table~\ref{tab:money}. }
 \label{fig:g}
 \end{figure}
@@ -288,7 +288,7 @@ On the other hand, DFT only took two seconds to analyze these six cases.
 \end{enumerate}
 The data that we took and analyzed in this article lie well inside the $\mu\sim$ 0.5 -- 2.0 window. 
 Part of this decision was motivated by the fact that a pronounced pedestal always assist the fitter and enhances gain determination through strong constraints in $Q_0$, $\sigma_0$ and $\mu$. 
-To understand how our method performs for large $\mu$ in the next section we analyzed data sets of simulated data.  
+To understand how our method performs for large $\mu$, in the next section we analyzed data sets of simulated data.  
 
 \section{Simulated data}
 \label{sec:mc}
@@ -314,7 +314,7 @@ was plotted. We note that $Q_s^\prime$ is the gain parameter returned by the min
 \begin{figure}[!t]
 \centering
 \includegraphics[width=11.5cm, height=8.2cm]{figures/comp.pdf} 
-\caption{}
+\caption{Comparison of the DFT (black) and numerical integration (green) methods. }
 \label{fig:comp}
 \end{figure}
 
@@ -330,16 +330,18 @@ In contrast, the numerical integration method starts to deviate significantly fr
 \label{sec:outro}
 
 In this article, we presented the calibration of PMTs with gaussian SPE charge response. %the Hamamatsu R7081 PMT model. 
-
-
-\newpage
 The analysis was based on a truncated gaussian PDF for the SPE response and we relied on the DFT method to solve the $S_R(x)$ model numerically. 
 We have showed that despite the complications involved in the multidimensional fit of the data, one can extract the gain with good precision. 
-In particular, the gain can be determined with $\sim$~1~\% accuracy or better within the $\mu$~$\sim$ 0.5 - 2.0 plateau. 
-Attention was paid to emphasize the fact that the gain should not be confused with the mean value of the SPE response $g(x)$ and, instead, 
-a weighted average between the exponential and gaussian terms should be preferred. 
+In particular, for the R7081 PMT the gain can be determined with $\sim$~1~\% accuracy or better within the $\mu$~$\sim$ 0.5 -- 2.0 plateau. 
+Attention was paid to emphasize the fact that the gain should not be confused with the mean value of the SPE response $g(x)$ and, instead, a weighted average between the exponential and gaussian terms should be preferred. 
 The same procedure can be applied to other PMTs which share the same characteristics in charge response with the R7081 PMT. 
 The analysis software used in these studies exists in a public github repository and can be used by other investigators \emph{mutatis mutandis}. 
+
+A comparison of the DFT and numerical integration methods was also attempted. 
+In particular we showed using R7081 data that within the 0.5--2.0 PE range both techniques provide consistent results, but DFT gives better $\chi^2$/NDOF and runs much faster. 
+In this respect, we pointed out that it is more appropriate for the analysis of large data samples. 
+Several analysis were performed with toy Monte Carlo data for various values of $\mu$. 
+Again, it was demonstrated that the DFT approach outperforms the numerical integration delivering an accuracy of 1\% or better for $\mu\le 8 $. 
 
 
 
@@ -353,8 +355,6 @@ In particular, in those circumstances we can expect the extraction of the gain t
  We can only expect that the accuracy achieved in this article will not be attainable in such cases.
 The question of the \emph{in situ} gain calibration of similar, complicated instruments lies beyond the scope of this article and was not treated here. 
 More details on the energy and spatial resolution of large-volume liquid scintillator detectors can be found elsewhere~\cite{smirnov}. 
-
-
 
 
 \appendix
