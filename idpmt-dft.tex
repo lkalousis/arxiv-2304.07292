@@ -305,7 +305,7 @@ The total charge was calculated by summing the individual charges that each PE d
 \end{enumerate}
 The parameters of the pedestal and SPE distributions were set to match those of the first line in table~\ref{tab:money}. 
 For each value of $\mu$ one hundred toy spectra were generated and fitted with both the DFT and the numerical integration methods. 
-Data were generated for $\mu$ inside the 0.5 -- 8.0 range. For each set of one hundred toys, the distribution of the absolute deviation from the true gain ($Q_s$):
+Data were generated for $\mu$ inside the 0.5 -- 8.0 range. For each set of one hundred toys, the distribution of the relative deviation from the true gain ($Q_s$):
 \begin{align}
 \Delta Q_s = \frac{Q_s^\prime}{Q_s} - 1,
 \end{align}  
@@ -338,7 +338,7 @@ The same procedure can be applied to other PMTs which share the same characteris
 The analysis software used in these studies exists in a public github repository and can be used by other investigators \emph{mutatis mutandis}. 
 
 A comparison of the DFT and numerical integration methods was also attempted. 
-In particular we showed using R7081 data that within the 0.5--2.0 PE range both techniques provide consistent results, but DFT gives better $\chi^2$/NDOF and runs much faster. 
+In particular we showed, using R7081 data, that within the 0.5--2.0 PE range both techniques provide consistent results, but DFT gives better $\chi^2$/NDOF and runs much faster. 
 In this respect, we pointed out that it is more appropriate for the analysis of large data samples. 
 Several analysis were performed with toy Monte Carlo data for various values of $\mu$. 
 Again, it was demonstrated that the DFT approach outperforms the numerical integration delivering an accuracy of 1\% or better for $\mu\le 8 $. 
