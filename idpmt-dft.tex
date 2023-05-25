@@ -249,12 +249,45 @@ $Q_g$ is very close to $Q$.
 \subsection{Comparison with the numerical integration method}
 %
 
-To assess the advantages of the DFT approach towards gain calibration we analyzed the same R7081 data set using the numerical method presented in ref.~\cite{dossi}.   
+To assess the advantages of the DFT approach towards gain calibration, we analyzed the same R7081 data set using the numerical method presented in ref.~\cite{dossi}.   
 Note that according to this procedure all the integrals of the convolutions in eq.~\eqref{eq:sr} are calculated numerically. 
 In practice, this was implemented in our analysis software using multiple for loops. 
-Unfortunately, the execution time to compute several $S_n(x)$ functions becomes increasingly large rendering this method 
-The $S_2(x)$ and 
+Unfortunately, the execution time to compute several $S_n(x)$ distributions becomes increasingly large, and thus, is rendering this method almost inapplicable. 
+To evade this difficulty we calculated the first two PE peaks\footnote{That is $S(x)*B$ and $S_2(x)*B$.} numerically and the higher PE peaks were approximated with symmetric gaussians. 
+The same recipe has been followed in ref.~\cite{darkside}. 
 
+\begin{table}[t!]
+\centering
+\begin{tabular}{| c  | c  | c | c | }
+\hline  \multicolumn{2}{|c|}{ DFT approach} & \multicolumn{2}{|c|}{Numerical integration} \\[0.6ex] \hline\hline
+  Gain, $Q_s$ & $\chi^2$/NDOF & Gain, $Q_s$  & $\chi^2$/NDOF \\ \hline
+ 0.0262 & 1.52 & 0.0262 & 1.48 \\
+ 0.0265 & 1.18 & 0.0265 & 1.38 \\ 
+ 0.0265 & 1.60 & 0.0265 & 1.77 \\ 
+ 0.0266 & 1.86 & 0.0266 & 2.17 \\ 
+ 0.0268 & 1.68 & 0.0268 & 2.04 \\
+ 0.0268 & 1.55 & 0.0268 & 1.88
+\\[0.6ex] \hline\hline 
+\multicolumn{2}{|c|}{ 2 sec } & \multicolumn{2}{|c|}{ 360 sec } \\  \hline
+\end{tabular}
+\caption{Comparison of the DFT approach and the numerical integration method.} 
+\label{tab:comp}
+\end{table}
+
+Table~\ref{tab:comp} shows the results of this study.
+For comparison purposes the figures from the DFT analysis are also included. 
+First columns show the gain ($Q_s$) obtained from the minimization procedure and second columns show the $\chi^2$/NDOF. 
+The last row shows the execution time that each method took for the analysis of the dataset presented in table~\ref{tab:money}.
+From these numbers the following conclusions can be drawn:
+\begin{enumerate}[i.]
+\item The first thing that can be observed from table~\ref{tab:comp} is that the two methods give identical figures insofar as gain determination is concerned. 
+Inside the $\mu\sim$ 0.5 - 2.0 plateau both techniques return the same gain. 
+\item Second, the DFT approach gives a slightly better fit, since the $\chi^2$/NDOF is systematically smaller. 
+Especially, one can see that as the Poisson mean $\mu$ increases the $\chi^2$/NDOF for the numerical integration method increases as well. 
+\item Last, the DFT method is almost two hundred times faster than the numerical integration. 
+For the analysis of large data sets (as is the case in large monolithic detectors) a numerical integration is impractical. 
+On the other hand, DFT only took two seconds to analyze these six histograms.  
+\end{enumerate}
 
 
 
