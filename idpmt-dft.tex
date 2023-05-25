@@ -20,7 +20,7 @@
 
 \emailAdd{leonidas.kalousis@gmail.com}
 
-\abstract{The purpose of the present article is to demonstrate the calibration of photomultiplier tubes with gaussian single photoelectron response using a numerical method based on the Discrete Fourier Transform (DFT). 
+\abstract{The purpose of the present article is to demonstrate the calibration of photomultipliers with a gaussian single photoelectron response using a numerical method based on the Discrete Fourier Transform (DFT). 
 Conventional techniques, commonly employed in the literature, use approximate models or brute force numerical calculations of the convolution integrals that lead to the charge response function of the photomultiplier, $S_R(x)$. 
 In this publication, we explain how a truncated gaussian model for the single photoelectron amplification can lead to rigorous results if one leans on the DFT approach. 
 The distinct feature of this procedure is that $S_R(x)$ is calculated to all orders in the Poisson mean $\mu$ that characterizes the light intensity and no approximations are needed. 
@@ -43,7 +43,8 @@ Data analysis}
 \section{Introduction}
 \label{sec:intro}
 
-The ten inches Hamamatsu R7081 photomultiplier tube (PMT) model has been used in several experiments in particle physics. 
+Most photomultipliers have a single photoelectron response function that can be parameterized with a gaussian distribution. 
+A prime example of this case is the ten inches Hamamatsu R7081 photomultiplier tube (PMT) model that has been used in several experiments in particle physics. 
 Double Chooz, RENO and IceCube to name only but a few \cite{dc,reno,icecube}.
 It is known to operate at a nominal gain of $10^7$ units of electron charge for about 1500~V of high voltage. 
 It has a photocathode sensitivity that ranges between 300 and 600~nm with a maximum peak in quantum efficiency of roughly 25~$\%$ at about 400~nm. 
@@ -68,7 +69,7 @@ In section~\ref{sec:theo} we outline briefly the basic theory of gain determinat
 In section~\ref{sec:data} we analyze data sets of R7081 PMT showcasing the validity of our study. 
 We close this article with some general remarks concerning the merits of our approach.
 
-
+\newpage
 \section{Standard theory}
 \label{sec:theo}
 
@@ -114,6 +115,7 @@ The code has been committed in a public github repository with several examples 
 We have analyzed all data in this article using this software. 
 
 
+\newpage
 \section{Data analysis}
 \label{sec:data}
 %
