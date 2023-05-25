@@ -24,7 +24,7 @@
 Conventional techniques, commonly employed in the literature, use approximate models or brute force numerical calculations of the convolution integrals that lead to the charge response function of the photomultiplier, $S_R(x)$. 
 In this publication, we explain how a truncated gaussian model for the single photoelectron amplification can lead to rigorous results if one leans on the DFT approach. 
 The distinct feature of this procedure is that $S_R(x)$ is calculated to all orders in the Poisson mean $\mu$ that characterizes the light intensity and no approximations are needed. 
-This scheme was applied to calibration of the Hamamatsu R7081 photomultiplier tube and toy Monte Carlo data. 
+This scheme was applied to the calibration of the Hamamatsu R7081 photomultiplier tube and toy Monte Carlo data. 
 A comparison of the DFT approach with the more standard numerical integration method is also presented.}
 
 
@@ -50,16 +50,16 @@ It is known to operate at a nominal gain of $10^7$ units of electron charge for 
 It has a photocathode sensitivity that ranges between 300 and 600~nm with a maximum peak in quantum efficiency of roughly 25~$\%$ at about 400~nm. 
 The good photoelectron resolution, the small dark noise, the low glass radioactivity levels and relatively low cost make R7081 an attractive choice for the instrumentation of various detectors. 
 
-Several methods have been employed in the literature for the calibration of the R7081 PMTs. 
+Several methods have been employed in the literature for the calibration of PMTs with a gaussian single photoelectron (SPE) response. 
 Perhaps, the most rigorous has been presented in a seminal paper written by Dossi \emph{et al.}, ref.~\cite{dossi}. 
-In the aforementioned publication, the single photoelectron (SPE) response was parametrized by a combination of an exponential distribution and a truncated gaussian. 
+In the aforementioned publication, the SPE response was parametrized by a combination of an exponential distribution and a truncated gaussian. 
 In our view, the key elements of the Dossi paper can be summarized in the following points:
 \begin{enumerate}[i.]
 \item the realization that the exponential term that models photoelectrons (PEs) that miss the first amplification stage is part of the signal (it adds to the gain) and,
 \item the use of a properly normalized, truncated gaussian to describe the full amplification chain, avoiding thus the prediction of negative charges in the underlying formulae. 
 \end{enumerate}
 None of these points is entirely trivial. 
-Unfortunately the final equation for the PMT charge response, $S_R(x)$, is rather complicated to be worked out analytically and one has to resort to some sort of an approximation. % has to be devised. 
+Unfortunately the final equation for the PMT charge response, $S_R(x)$, is rather complicated to be worked out analytically and one has to resort to some sort of an approximation. 
 For example, the DarkSide collaboration solved the convolution integrals involved in the calculation of $S_R(x)$ numerically for the first two peaks, and the higher peaks were approximated by perfect gaussians~\cite{darkside}. 
 That was adequate for the needs of DarkSide. 
 
@@ -67,9 +67,12 @@ In this work, we seek to apply the Dossi model to the calibration of the R7081 P
 The distinct feature of this procedure is that $S_R(x)$ is calculated numerically to all orders in the Poissonian mean ($\mu$) and no approximations are needed. 
 In section~\ref{sec:theo} we outline briefly the basic theory of gain determination and we present the Discrete Fourier Transform (DFT) technique exploited throughout the publication. 
 In section~\ref{sec:data} we analyze data sets of R7081 PMT showcasing the validity of our study. 
-We close this article with some general remarks concerning the merits of our approach.
+A comparison with the common numerical integration method is included. 
+In section~\ref{sec:mc} we present a Monte Carlo study showing the advantages of the DFT approach. 
+We close this publication with some general remarks concerning gain calibration. 
+% concerning the merits of our approach.
 
-\newpage
+
 \section{Standard theory}
 \label{sec:theo}
 
@@ -115,7 +118,6 @@ The code has been committed in a public github repository with several examples 
 We have analyzed all data in this article using this software. 
 
 
-\newpage
 \section{Data analysis}
 \label{sec:data}
 %
@@ -245,6 +247,15 @@ $Q_g$ is very close to $Q$.
 \caption{Distribution of the gain ($Q_s$) for the measurements compiled in table~\ref{tab:money}. }
 \label{fig:g}
 \end{figure}
+
+\subsection{Comparison with the numerical integration method}
+
+\section{Simulated data}
+\label{sec:mc}
+
+yeah !
+
+
 
 \section{Outlook}
 \label{sec:outro}
