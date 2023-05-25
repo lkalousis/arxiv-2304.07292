@@ -305,7 +305,7 @@ The total charge was calculated by summing the individual charges that each PE d
 \end{enumerate}
 The parameters of the pedestal and SPE distributions were set to match those of the first line in table~\ref{tab:money}. 
 For each value of $\mu$ one hundred toy spectra were generated and fitted with both the DFT and the numerical integration methods. 
-Data were generated for $\mu$ inside the 0.5 -- 8.0 range. For each set of one hundred toys, the distribution of the relative deviation from the true gain ($Q_s$):
+Data were generated for $\mu$ inside the 0.5 -- 7.0 range. For each set of one hundred toys, the distribution of the relative deviation from the true gain ($Q_s$):
 \begin{align}
 \Delta Q_s = \frac{Q_s^\prime}{Q_s} - 1,
 \end{align}  
@@ -321,8 +321,8 @@ was plotted. We note that $Q_s^\prime$ is the gain parameter returned by the min
 Figure~\ref{fig:comp} shows the results of this exercise. 
 The $x$ axis shows $\mu$ and the $y$ axis shows the mean value of the $\Delta Q_s$ distribution for the one hundred toys. 
 The black dots depict the results from the DFT approach and the green dots those of the numerical integration respectively. 
-One sees that DFT provides excellent results inside the $\mu = $ 0.5 -- 4.0 range and a deviation of $\sim$ 1\% is observed only at the high value of $\mu=8$. 
-In contrast, the numerical integration method starts to deviate significantly from the true gain at $\mu=4$ and for $\mu=8$ the deviation reaches the value of ... \%. 
+One sees that DFT provides excellent results inside the $\mu = $ 0.5 -- 4.0 range and a deviation of $\sim$ 1\% is observed only at the high value of $\mu=7$. 
+In contrast, the numerical integration method starts to deviate significantly from the true gain at $\mu=4$ and for $\mu=7$ the deviation reaches the value of ... \%. 
 
 
 
@@ -341,7 +341,7 @@ A comparison of the DFT and numerical integration methods was also attempted.
 In particular we showed, using R7081 data, that within the 0.5--2.0 PE range both techniques provide consistent results, but DFT gives better $\chi^2$/NDOF and runs much faster. 
 In this respect, we pointed out that it is more appropriate for the analysis of large data samples. 
 Several analysis were performed with toy Monte Carlo data for various values of $\mu$. 
-Again, it was demonstrated that the DFT approach outperforms the numerical integration delivering an accuracy of 1\% or better for $\mu\le 8 $. 
+Again, it was demonstrated that the DFT approach outperforms the numerical integration delivering an accuracy of 1\% or better for $\mu\le 7 $. 
 
 
 
