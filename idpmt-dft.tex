@@ -93,7 +93,7 @@ S_R(x) = &\sum_{n=0}^{+\infty} P(n;\mu)   S^{(n)}_R(x) \nonumber \\
 \end{align}
 Note that a final convolution with the pedestal PDF, $B(x)$, is needed to include white noise from the electronics and other sources. 
 Of course, $S_1(x)=S(x)$ and $S_0(x)=\delta(x)$. More details on the theory of PMT calibration can be found in ref.~\cite{me}.
-The mean and standard deviation of $S_R(x)$, that is, $Q_R$ and $\sigma_R$ are equal to be:
+The mean and standard deviation of $S_R(x)$, that is, $Q_R$ and $\sigma_R$ are equal to:
 \begin{align}
 Q_R  = & \ Q_0 + \mu Q_s \\
 \sigma_R^2      = & \  \sigma_0^2 + \mu( \sigma_s^2 + Q_s^2 ),  
@@ -235,10 +235,10 @@ $\mu$                      & $w$                         &  $\alpha$         &  
 
 Figure~\ref{fig:Q} shows the best fit curves in azure line. 
 One can readily see that the model follows closely the data for all examples ($\chi^2$/NDOF was always close to one). 
-Furthermore, more data were taken with increasing light intensity to asses the stability of gain determination. 
+Furthermore, more data were taken with increasing light intensity to assess the stability of gain determination. 
 The results are gathered in table~\ref{tab:money}. 
 Even though strong correlations exist between the various parameters, and even though there's a drift in the extraction of $w$ and $\alpha$  in particular,
-the gain as calculated by the eq.~\eqref{eq:qs} and \eqref{eq:qg} is quite stable inside the $\mu$~$\sim$~0.5 - 2.0 PE plateau. 
+the gain as calculated by the eq.~\eqref{eq:qs} and \eqref{eq:qg} is quite stable inside the $\mu$~$\sim$~0.5 -- 2.0 PE plateau. 
 Figure~\ref{fig:g} shows the gain distribution for the results of table~\ref{tab:money}. One readily sees that $Q_s$ is stable within a $\sim$~1~\% range. 
 Two further remarks should be made. First, one should never identify gain with $Q_g$ as this will overestimate the true gain. 
 On the contrary, the gain should be calculated by the weighted average of eq.~\eqref{eq:qs}. 
@@ -283,12 +283,12 @@ From these numbers the following conclusions can be drawn:
 Inside the $\mu\sim$ 0.5 -- 2.0 plateau both techniques return the same gain. 
 \item Second, the DFT approach gives a slightly better fit, since the $\chi^2$/NDOF is systematically smaller than that of the numerical method. 
 \item Last, the DFT method is almost two hundred times faster than the numerical integration. 
-For the analysis of large data sets (as is the case in large monolithic detectors) a numerical integration is impractical. 
+For the analysis of large data sets (as is the case of large monolithic detectors) a numerical integration is impractical. 
 On the other hand, DFT only took two seconds to analyze these six cases. 
 \end{enumerate}
 The data that we took and analyzed in this article lie well inside the $\mu\sim$ 0.5 -- 2.0 window. 
 Part of this decision was motivated by the fact that a pronounced pedestal always assist the fitter and enhances gain determination through strong constraints in $Q_0$, $\sigma_0$ and $\mu$. 
-To understand how our method performs for large $\mu$, in the next section we analyzed data sets of simulated data.  
+To understand how our method performs for large $\mu$, in the next section we analyzed sets of simulated data.  
 
 \section{Simulated data}
 \label{sec:mc}
@@ -297,7 +297,7 @@ Series of several toy Monte Carlo SPE spectra were generated.
 The algorithm that was used to produce these data sets can be summarized in the following steps:
 \begin{enumerate}[i.]
 \item First, a number of PEs was thrown from a Poisson distribution of mean value $\mu$.
-\item For each PE, a charge was picked randomly from the SPE distribution of eqs.~\eqref{eq:S} and \eqref{eq:g}. 
+\item For each PE, a charge was picked randomly from the SPE distribution of eq.~\eqref{eq:S} and \eqref{eq:g}. 
 The total charge was calculated by summing the individual charges that each PE deposits. 
 \item A charge was thrown from the gaussian distribution of the pedestal and summed to the total charge obtained in step two. 
 \item The final, total charge was filled in a histogram.  
