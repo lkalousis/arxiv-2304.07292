@@ -24,8 +24,8 @@
 Conventional techniques, commonly employed in the literature, use approximate models or brute force numerical calculations of the convolution integrals that lead to the charge response function of the photomultiplier, $S_R(x)$. 
 In this publication, we explain how a truncated gaussian model for the single photoelectron amplification can lead to rigorous results if one leans on the DFT approach. 
 The distinct feature of this procedure is that $S_R(x)$ is calculated to all orders in the Poisson mean $\mu$ that characterizes the light intensity and no approximations are needed. 
-This scheme was applied to the calibration of the Hamamatsu R7081 photomultiplier tube and toy Monte Carlo data. 
-A comparison of the DFT approach with the more standard numerical integration method is also presented.}
+This scheme was applied to the calibration of the Hamamatsu R7081 photomultiplier tube and a comparison of the DFT approach with the more standard numerical integration method is also presented.
+Last, toy Monte Carlo were analyzed for different values of $\mu$ to understand the precision of the DFT method.}
 
 
 \keywords{Photon detectors for UV, visible and IR photons (vacuum) (photomultipliers, HPDs, others); 
@@ -283,20 +283,13 @@ From these numbers the following conclusions can be drawn:
 \item The first thing that can be observed from table~\ref{tab:comp} is that the two methods give identical figures insofar as gain determination is concerned. 
 Inside the $\mu\sim$ 0.5 - 2.0 plateau both techniques return the same gain. 
 \item Second, the DFT approach gives a slightly better fit, since the $\chi^2$/NDOF is systematically smaller than that of the numerical method. 
-%Especially, one can see that as the Poisson mean $\mu$ increases the $\chi^2$/NDOF for the numerical integration method increases as well. 
 \item Last, the DFT method is almost two hundred times faster than the numerical integration. 
 For the analysis of large data sets (as is the case in large monolithic detectors) a numerical integration is impractical. 
 On the other hand, DFT only took two seconds to analyze these six cases. 
 \end{enumerate}
-
-
-
-
-
-
-
-
-
+The data that we took and analyzed in this article lie well inside the $\mu\sim$ 0.5 - 2.0 window. 
+Part of this decision was motivated by the fact that the a pronounced pedestal always assist the fitter and enhances gain determination through strong constraints in $Q_0$, $\sigma_0$ and $\mu$. 
+To understand how our method performs for large $\mu$ in the next section we analyzed data sets of simulated data.  
 
 \section{Simulated data}
 \label{sec:mc}
