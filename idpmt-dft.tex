@@ -11,7 +11,7 @@
 
 \usepackage{enumerate}
 
-\title{\boldmath Calibration of photomultiplier tubes with gaussian single photoelectron response}
+\title{\boldmath Calibration of photomultiplier tubes} % with gaussian single photoelectron response}
 
 \author[a]{L. N. Kalousis} 
 %\author[a,1]{L. N. Kalousis\note{Corresponding author.}}
@@ -197,9 +197,6 @@ The procedure is best described in ref.~\cite{me}.
 First, a gaussian fit was performed on the pedestal alone to obtain approximate values for $Q_0$, $\sigma_0$ and $\mu$. 
 The model was minimized using the Minuit2 software~\cite{Minuit2}. 
 
-
-
-
 We should point out that for all the measurements included in this publication the optical fiber was placed at the center of the photocathode,
 using a plastic halo-like structure, and that the fiber was always pointing vertically with respect to the surface of the PMT.\footnote{%
 More details on the experimental setup, including pictures of the halo-like structure, can be found in ref.~\cite{thesis}.}
@@ -252,22 +249,22 @@ To assess the advantages of the DFT approach towards gain determination, we anal
 Note that according to this procedure all the integrals of the convolutions in eq.~\eqref{eq:sr} are calculated numerically. 
 In practice, this was implemented in our analysis software using multiple for loops. 
 Unfortunately, the execution time to compute several $S_n(x)$ distributions becomes increasingly large, and thus, is rendering this method almost inapplicable. 
-To evade this difficulty we calculated the first two PE peaks\footnote{That is $S(x)*B$ and $S_2(x)*B$.} numerically and the higher PE peaks were approximated with symmetric gaussians. 
-The same recipe has been followed in ref.~\cite{darkside}. 
+To evade this difficulty we calculated the first PE peak\footnote{That is ($S(x)*B$)(x).} numerically and the higher PE peaks were approximated with symmetric gaussians. 
+%The same recipe has been followed in ref.~\cite{darkside}. 
 
 \begin{table}[t!]
 \centering
 \begin{tabular}{| c  | c  | c | c | }
 \hline  \multicolumn{2}{|c|}{ DFT approach} & \multicolumn{2}{|c|}{Numerical integration} \\[0.6ex] \hline\hline
   Gain, $Q_s$ & $\chi^2$/NDOF & Gain, $Q_s$  & $\chi^2$/NDOF \\ \hline
- 0.0262 & 1.52 & 0.0262 & 1.48 \\
- 0.0265 & 1.18 & 0.0265 & 1.38 \\ 
- 0.0265 & 1.60 & 0.0265 & 1.77 \\ 
- 0.0266 & 1.86 & 0.0266 & 2.17 \\ 
- 0.0268 & 1.68 & 0.0268 & 2.04 \\
- 0.0268 & 1.55 & 0.0268 & 1.88
+ 0.0262 & 1.52 & 0.0262 & 2.33 \\
+ 0.0265 & 1.18 & 0.0263 & 2.03 \\ 
+ 0.0265 & 1.60 & 0.0264 & 2.97 \\ 
+ 0.0266 & 1.86 & 0.0264 & 3.31 \\ 
+ 0.0268 & 1.68 & 0.0266 & 2.85 \\
+ 0.0268 & 1.55 & 0.0267 & 2.96 
 \\[0.6ex] \hline\hline 
-\multicolumn{2}{|c|}{ 2 sec } & \multicolumn{2}{|c|}{ 360 sec } \\  \hline
+\multicolumn{2}{|c|}{ 1 sec } & \multicolumn{2}{|c|}{ 11 sec } \\  \hline
 \end{tabular}
 \caption{Comparison of the DFT approach and the numerical integration method.} 
 \label{tab:comp}
@@ -279,12 +276,12 @@ First columns show the gain ($Q_s$) obtained from the minimization procedure and
 The last row shows the execution time that each method took for the analysis of the dataset presented in table~\ref{tab:money}.
 From these numbers the following conclusions can be drawn:
 \begin{enumerate}[i.]
-\item The first thing that can be observed from table~\ref{tab:comp} is that the two methods give identical figures insofar as gain determination is concerned. 
+\item The first thing that can be observed from table~\ref{tab:comp} is that the two methods give almost identical figures insofar as gain determination is concerned. 
 Inside the $\mu\sim$ 0.5 -- 2.0 plateau both techniques return the same gain. 
-\item Second, the DFT approach gives a slightly better fit, since the $\chi^2$/NDOF is systematically smaller than that of the numerical method. 
-\item Last, the DFT method is almost two hundred times faster than the numerical integration. 
-For the analysis of large data sets (as is the case of large monolithic detectors) a numerical integration is impractical. 
-On the other hand, DFT only took two seconds to analyze these six cases. 
+\item Second, the DFT approach gives a better fit, since the $\chi^2$/NDOF is systematically smaller than that of the numerical method. 
+\item Last, the DFT method is almost ten times faster than the numerical integration. 
+%For the analysis of large data sets (as is the case of large monolithic detectors) a numerical integration is impractical. 
+%On the other hand, DFT only took one seconds to analyze these six cases. 
 \end{enumerate}
 The data that we took and analyzed in this article lie well inside the $\mu\sim$ 0.5 -- 2.0 window. 
 Part of this decision was motivated by the fact that a pronounced pedestal always assist the fitter and enhances gain determination through strong constraints in $Q_0$, $\sigma_0$ and $\mu$. 
@@ -301,11 +298,11 @@ The algorithm that was used to produce these data sets can be summarized in the 
 The total charge was calculated by summing the individual charges that each PE deposits. 
 \item A charge was thrown from the gaussian distribution of the pedestal and summed to the total charge obtained in step two. 
 \item The final, total charge was filled in a histogram.  
-\item This procedure was repeated $2.5\  10^5$ times and a histogram of $2.5\  10^5$ entries was produced. 
+\item This procedure was repeated $2.5\  10^6$ times and a histogram of $2.5\  10^6$ entries was produced. 
 \end{enumerate}
 The parameters of the pedestal and SPE distributions were set to match those of the first line in table~\ref{tab:money}. 
 For each value of $\mu$ one hundred toy spectra were generated and fitted with both the DFT and the numerical integration methods. 
-Data were generated for $\mu$ inside the 0.5 -- 7.0 range. For each set of one hundred toys, the distribution of the relative deviation from the true gain ($Q_s$):
+Data were generated for $\mu$ inside the 0.5 -- 5.0 range. For each set of one hundred toys, the distribution of the relative deviation from the true gain ($Q_s$):
 \begin{align}
 \Delta Q_s = \frac{Q_s^\prime-Q_s}{Q_s} ,
 \end{align}  
@@ -321,9 +318,8 @@ was plotted. We note that $Q_s^\prime$ is the gain parameter returned by the min
 Figure~\ref{fig:comp} shows the results of this exercise. 
 The $x$ axis shows $\mu$ and the $y$ axis shows the mean value of the $\Delta Q_s$ distribution for the one hundred toys. 
 The black dots depict the results from the DFT approach and the green dots those of the numerical integration respectively. 
-One sees that DFT provides excellent results inside the $\mu = $ 0.5 -- 4.0 range and a deviation of $\sim$ 1\% is observed only at the high value of $\mu=7$. 
-In contrast, the numerical integration method starts to deviate significantly from the true gain at $\mu=4$ and for $\mu=7$ the deviation reaches the value of ... \%. 
-
+One sees that DFT provides excellent results inside the $\mu = $ 0.5 -- 5.0 range and a deviation of $\sim$ 0.3\% is observed only at the high value of $\mu=5$. 
+In contrast, the numerical integration method starts to deviate significantly from the true gain and for $\mu=5$ the deviation reaches the value of $\sim$ 4~\%. 
 
 
 \section{Outlook}
@@ -338,13 +334,10 @@ The same procedure can be applied to other PMTs which share the same characteris
 The analysis software used in these studies exists in a public github repository and can be used by other investigators \emph{mutatis mutandis}. 
 
 A comparison of the DFT and numerical integration methods was also attempted. 
-In particular we showed, using R7081 data, that within the 0.5--2.0 PE range both techniques provide consistent results, but DFT gives better $\chi^2$/NDOF and runs much faster. 
-In this respect, we pointed out that DFT is more appropriate for the analysis of large data samples. 
+In particular we showed, using R7081 data, that within the 0.5 -- 2.0 PE range both techniques provide consistent results, but DFT gives better $\chi^2$/NDOF and runs much faster. 
+In this respect, we should point out that DFT is more appropriate for the analysis of large data samples. 
 Several analysis were performed with toy Monte Carlo data for various values of $\mu$. 
-Again, it was demonstrated that the DFT approach outperforms the numerical integration having an accuracy of 1\% or better for $\mu\le 7 $. 
-
-
-
+Again, it was demonstrated that the DFT approach outperforms the numerical integration having an accuracy of better than 0.5~\% inside the $\mu\sim $ 0.5 -- 5.0 window. 
 
 The following remarks are necessary. 
 In this publication we have only tried to demonstrate the calibration of the R7081 PMT model in just the simplest case. 

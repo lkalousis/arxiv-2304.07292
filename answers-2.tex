@@ -18,7 +18,7 @@ I have tried to address them along the lines that now follow:
 
 C: \emph{ I would suggest removing the type of PMT from the title, making it more generic. } 
 	
-A: I have changed the title to ``Calibration of photomultiplier tubes with gaussian single photoelectron response'' 
+A: I have changed the title to ``Calibration of photomultiplier tubes'' %with gaussian single photoelectron response'' 
 to accommodate the referee's comment.
 Several parts of the text (especially in the Introduction) have changed, but only lightly, to reflect this modification. 
 \\[1ex]
@@ -34,14 +34,12 @@ Last, toy Monte Carlo were analyzed for different values of $\mu$ to understand 
 C: \emph{ It would be more evident if the author would provide a comparison of the new method with the original one and demonstrate the improvement of the precision. }
 	
 A: A subsection dedicated to this study has been added (subsection 3.3). 
-One can see that inside the $\mu\sim$ 0.5 - 0.2 range both methods return the same gain. 
-The advantages of the DFT lies in the following:
+The referee may have a look, but in a nutshell, inside the $\mu\sim$ 0.5 - 0.2 range both methods return the same gain. 
+The advantages of the DFT lie in the following:
 \begin{itemize}
 \item DFT gives a better $\chi^2$/NDOF and, 
 \item DFT runs much faster. 
-It is (almost) 200 times faster than the numerical integration method. 
 \end{itemize}
-
 
 C: \emph{Another point is the systematics attributed to the (improved or not) model of SPE. 
 The tests with toy MC would be more informative with respect to the experimental tests.}
@@ -54,7 +52,7 @@ A: I have added a full section to cover this point (section 4). The referee can 
 \end{itemize}
 The last two points have been observed with real PMT data. 
 The first one is treated here with the toy MC. 
-In particular, the DFT approach is accurate at $\sim$ 1\% level for $\mu=8$. 
+In particular, the DFT approach is accurate at $\sim$ 0.3\% level for $\mu=5$. 
 \\[1ex]
 
 C: \emph{I recommend adding comparison of improved/original models both for the experimental data and for the toy MC.}
@@ -63,6 +61,16 @@ A: Have been treated above.
 \\[1ex]
 
 The Outlook has been slightly edited to account for these modifications. 
-The paper (with the current changes) has been uploaded to JINST and the newest version has been submitted to arxiv (it should appear by Monday).
+In particular the paragraph was added:
+\\[1ex]
+
+A comparison of the DFT and numerical integration methods was also attempted. 
+In particular we showed, using R7081 data, that within the 0.5 -- 2.0 PE range both techniques provide consistent results, but DFT gives better $\chi^2$/NDOF and runs much faster. 
+In this respect, we should point out that DFT is more appropriate for the analysis of large data samples. 
+Several analysis were performed with toy Monte Carlo data for various values of $\mu$. 
+Again, it was demonstrated that the DFT approach outperforms the numerical integration having an accuracy of better than 0.5~\% inside the $\mu\sim $ 0.5 -- 5.0 window. 
+\\[1ex]
+
+The paper (with the current changes) has been uploaded to JINST and the newest version has been submitted to arxiv (it should appear soon).
 
 \end{document}
