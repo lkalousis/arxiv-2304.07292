@@ -138,7 +138,7 @@ Q_s = & \ \frac{w}{\alpha} + (1-w)Q_g \label{eq:qs} \\
 \sigma_s^2       = & \ \frac{w}{a^2} +(1-w)\sigma_g^2 + w(1-w)\left( Q_g -\frac{1}{a} \right)^2,
 \end{align}
 where $Q_g$ and $\sigma_g$ are the mean value and standard deviation of $g(x)$.
-Note that when $w=0$, we have $Q_s=Q_f$ and $\sigma_s=\sigma_f$. 
+Note that when $w=0$, we have $Q_s=Q_g$ and $\sigma_s=\sigma_g$. 
 On the other hand, for $w=1$ the mean value and standard deviation of $S(x)$ are those of the exponential term.  
 
  The $g(x)$ PDF model adopted by Dossi \emph{et al.} is~\cite{dossi}:
@@ -162,7 +162,7 @@ where $\kappa$ is given by the equation:
 \begin{align}
  \kappa = \  \frac{1}{g_N} \frac{1}{\sqrt{2\pi}} \  \sigma \ e^{ - \frac{Q^2}{2\sigma^2}}. 
 \end{align} 
-One can see that as $Q$ increases, $\kappa$ approaches to zero due  to the damping exponential factor and $Q_f, \ \sigma_f$ approach $Q$ and $\sigma$ respectively.  
+One can see that as $Q$ increases, $\kappa$ approaches to zero due  to the damping exponential factor and $Q_g, \ \sigma_g$ approach $Q$ and $\sigma$ respectively.  
 
 \subsection{Experimental data and results}
 %
@@ -249,7 +249,7 @@ To assess the advantages of the DFT approach towards gain determination, we anal
 Note that according to this procedure all the integrals of the convolutions in eq.~\eqref{eq:sr} are calculated numerically. 
 In practice, this was implemented in our analysis software using multiple for loops. 
 Unfortunately, the execution time to compute several $S_n(x)$ distributions becomes increasingly large, and thus, is rendering this method almost inapplicable. 
-To evade this difficulty we calculated the first PE peak\footnote{That is ($S(x)*B$)(x).} numerically and the higher PE peaks were approximated with symmetric gaussians. 
+To evade this difficulty we calculated the first PE peak\footnote{That is ($S*B$)(x).} numerically and the higher PE peaks were approximated with symmetric gaussians. 
 %The same recipe has been followed in ref.~\cite{darkside}. 
 
 \begin{table}[t!]
